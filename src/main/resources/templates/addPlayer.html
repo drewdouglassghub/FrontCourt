@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Create A Player</title>
+</head>
+<body>
+
+	<h1>Add a Player</h1>
+	
+	<form th:object="${newPlayer}" th:action="@{/addPlayer}" method='POST'>
+	
+	 Jersey Number: <input name="jerseynum" size="2"> <br/>
+	 First Name: <input name="firstname" size="30"> <br />
+	 Last Name: <input name="lastname" size="30"> <br />
+	 Age: <input name="age" size="2"><br />
+	 Position: <input name="playerpos" size="2"><br />
+	 Height: <input name="height" size="5"><br />
+	 Weight: <input name="weight" size="3"><br />
+
+        
+        
+        
+ <input name="submit" type="submit" value="submit"/>
+         
+</form>
+
+</body>
+</html>

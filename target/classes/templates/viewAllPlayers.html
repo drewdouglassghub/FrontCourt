@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Player List</title>
+</head>
+<body>
+
+
+<h1>Players</h1>
+<div>
+<form>
+<table>
+
+  <thead>
+		<tr>
+			<th>ID: </th>
+			<th>Jersey #: </th>
+			<th>First: </th>
+			<th>Last: </th>
+			<th>Age: </th>
+			<!-- <th>Picture: </th> -->
+			<th>Position: </th>
+			<th>Height: </th>
+			<th>Weight: </th>			
+		
+		</tr>
+	</thead>
+		<tr th:each="currentPlayer : ${player}">
+		<td th:text="${currentPlayer.getPlayerid()}"/>
+		<td th:text="${currentPlayer.getJerseynum()}"/>
+		<td th:text="${currentPlayer.getFirstname()}"/>
+		<td th:text="${currentPlayer.getLastname()}"/>
+		<td th:text="${currentPlayer.getAge()}"/>
+		<td th:text="${currentPlayer.getPlayerpos()}"/>
+		<td th:text="${currentPlayer.getHeight()}"/>
+		<td th:text="${currentPlayer.getWeight()}"/>
+		<td> <a th:href="@{/editPlayer/{id}(id=${currentPlayer.getPlayerid()})}">Edit</a></td>
+		<td> <a th:href="@{/offenseStats/{playerid}(playerid=${currentPlayer.getPlayerid()})}">Offensive</a></td>
+		<td> <a th:href="@{/defenseStas/{playerid}(playerid=${currentPlayer.getPlayerid()})}">Defensive</a></td>
+		<!-- <td th:text="${currentPlayer.playerpic}"/> -->
+		
+		</tr>
+
+</table>
+</form>
+<a href="../addPlayer">Add Player</a>
+</div>
+
+</body>
+</html>
