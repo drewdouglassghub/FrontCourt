@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 @Table(name="player")
-@SecondaryTable(name="SHOOTING_STATS")
 public class Player {
 
 	
@@ -35,8 +34,8 @@ public class Player {
 	@Column(name="WEIGHT")
 	private String weight;
 	
-	@Autowired
-	private ShootingStats stats;
+	//@Autowired
+	//private ShootingStats stats;
 	
 	//public byte[] playerpic;
 	
@@ -86,13 +85,13 @@ public class Player {
 		this.lastname = lastname;
 	}
 	
-	public ShootingStats getShootingStats(){
+	/*public ShootingStats getShootingStats(){
 		return stats;
 	}
 	
 	public void setShootingStats(ShootingStats stats) {
 		this.stats = stats;
-	}
+	}*/
 
 	public long getAge() {
 		return age;

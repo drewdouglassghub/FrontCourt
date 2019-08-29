@@ -52,6 +52,14 @@ public class ShootingStats {
 		this.tppct = tppct;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public int getFieldgoalsmade() {
 		return fieldgoalsmade;
 	}
@@ -122,6 +130,14 @@ public class ShootingStats {
 
 	public void setTppct(double tppct) {
 		this.tppct = tppct;
+	}
+
+	@Override
+	public String toString() {
+		return "ShootingStats [id=" + id + ", fieldgoalsmade=" + fieldgoalsmade + ", fieldgoalstaken=" + fieldgoalstaken
+				+ ", freethrowsmade=" + freethrowsmade + ", freethrowstaken=" + freethrowstaken + ", threepointersmade="
+				+ threepointersmade + ", threepointerstaken=" + threepointerstaken + ", fgpct=" + fgpct + ", ftpct="
+				+ ftpct + ", tppct=" + tppct + "]";
 	}
 
 	
