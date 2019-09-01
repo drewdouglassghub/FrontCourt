@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Offensive Statistics</title>
+</head>
+<body>
+
+<table>
+<thead>
+<tr>
+<th>FG's Made: </th>
+			<th>FG's Taken: </th>
+			<th>FT's Made: </th>
+			<th>FT's Taken: </th>
+			<th>TP's Made: </th>
+			<th>TP's Taken: </th>
+			<th>Field Goal Pct: </th>
+			<th>Free Throw Pct: </th>
+			<th>Three Point Pct: </th> 
+			
+	</tr>	
+	</thead>	
+		<tr th:each="stats : ${stats}">
+		<td th:text="${stats.getId()}"/>
+		<td th:text="${stats.getFieldgoalsmade()}"/>		
+		<td th:text="${stats.getFieldgoalstaken()}"/>
+		<td th:text="${stats.getFreethrowsmade()}"/>
+		<td th:text="${stats.getFreethrowstaken()}"/>
+		<td th:text="${stats.getThreepointersmade()}"/>
+		<td th:text="${stats.getThreepointerstaken()}"/>
+		<td th:text="${stats.getFgpct()}"/>
+		<td th:text="${stats.getFtpct()}"/>
+		<td th:text="${stats.getTppct()}"/> 
+		</tr>
+		</table>
+</body>
+</html>

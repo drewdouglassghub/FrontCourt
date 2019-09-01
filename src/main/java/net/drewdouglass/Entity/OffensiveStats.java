@@ -2,15 +2,15 @@ package net.drewdouglass.Entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-
-
 
 @Entity
 @Table(name="SHOOTING_STATS")
-public class ShootingStats {
+public class OffensiveStats {
 
 	@Id
 	@Column(name="ID")
@@ -34,12 +34,16 @@ public class ShootingStats {
 	@Column(name="tppct")
 	private double tppct;
 	
-	public ShootingStats() {
+	@OneToOne(fetch=FetchType.LAZY, optional = false)
+	@JoinColumn(name="PLAYER_ID")
+	private Player playerid;
+	
+	public OffensiveStats() {
 		super();
 	};
 	
-	public ShootingStats(int fieldgoalsmade, int fieldgoalstaken, int freethrowsmade, int freethrowstaken,
-			int threepointersmade, int threepointerstaken, double fgpct, double ftpct, double tppct) {
+	public OffensiveStats(int fieldgoalsmade, int fieldgoalstaken, int freethrowsmade, int freethrowstaken,
+			int threepointersmade, int threepointerstaken, double fgpct, double ftpct, double tppct, Player playerid) {
 		super();
 		this.fieldgoalsmade = fieldgoalsmade;
 		this.fieldgoalstaken = fieldgoalstaken;
@@ -50,6 +54,15 @@ public class ShootingStats {
 		this.fgpct = fgpct;
 		this.ftpct = ftpct;
 		this.tppct = tppct;
+		this.playerid = playerid;
+	}
+	
+	public Player getPlayer() {
+		return playerid;
+	}
+
+	public void setPlayer(Player playerid) {
+		this.playerid = playerid;
 	}
 
 	public int getId() {

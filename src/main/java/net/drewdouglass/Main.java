@@ -34,19 +34,7 @@ public class Main  {
 		   
 		SpringApplication.run(Main.class, args);
 		
-		/*Session session = HibernateUtils.getHibernateQuery(query);
-		 	CriteriaBuilder cb = session.getCriteriaBuilder();
-		 	CriteriaQuery<Player> p = cb.createQuery(Player.class);
-		 	Root<Player> root= p.from(Player.class);
-		 	p.select(root);
-		 	
-	NativeQuery<Player> q = session.createNativeQuery("SELECT p.firstname, p.lastname, p.playerpos FROM Player p WHERE p.playerid = ?");
-		q.setParameter(1,1);
-		Player player =  q.getSingleResult();
-		
-		System.out.println("Player "
-		        + player);
-		
+	
 	}
 
 	public void run(String... args) throws Exception {
@@ -77,4 +65,4 @@ public class Main  {
 	      Files.write(Paths.get("retrieve-dir/" + imageModel.getName() + "." + imageModel.getType()), imageModel.getPic());
 	    }*/
 	}
-}
+

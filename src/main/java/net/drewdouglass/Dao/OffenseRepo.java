@@ -1,0 +1,13 @@
+package net.drewdouglass.Dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import net.drewdouglass.Entity.OffensiveStats;
+import net.drewdouglass.Entity.Player;
+
+public interface OffenseRepo extends JpaRepository<Player, Long>{
+
+
+	OffensiveStats findByPlayerid(long playerid);
+
+}

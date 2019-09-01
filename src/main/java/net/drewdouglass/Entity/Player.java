@@ -8,11 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Entity
 @Table(name="player")
+@DynamicUpdate
 public class Player {
 
 	
@@ -34,8 +36,6 @@ public class Player {
 	@Column(name="WEIGHT")
 	private String weight;
 	
-	//@Autowired
-	//private ShootingStats stats;
 	
 	//public byte[] playerpic;
 	
@@ -84,6 +84,7 @@ public class Player {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
+	
 	
 	/*public ShootingStats getShootingStats(){
 		return stats;

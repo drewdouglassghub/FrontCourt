@@ -7,22 +7,31 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import net.drewdouglass.Dao.OffenseRepo;
 import net.drewdouglass.Dao.PlayerRepository;
-import net.drewdouglass.Dao.StatRepository;
 import net.drewdouglass.Entity.Player;
+import net.drewdouglass.Entity.OffensiveStats;
 
 
 
 @Controller
+@RequestMapping
+@SessionAttributes("player")
 public class PlayerController {
-
+	
+	  @ModelAttribute("player")
+	   public Player setUpPlayerForm() {
+	      return new Player();
+	   }
 	
 	@Autowired
 	PlayerRepository playerRepo;
 	
 	@Autowired
-	StatRepository statRepo;
+	OffenseRepo oRepo;
 	
 	@GetMapping("/viewAll")
 	public String viewAllPlayers(Model model) {
@@ -51,14 +60,22 @@ public class PlayerController {
 	
 	/* ***************************** Offensive stat controls  *************************************** */
 	
-	@GetMapping("/offenseStats/{id}")
-	public String showOffensiveStatsByPlayer(@PathVariable("id") int id, Model model) {
-		Player p = playerRepo.findById((long) id)
+	@RequestMapping("/offenseStats/{id}")
+	public String showOffensiveStatsByPlayer(@PathVariable("id") long id, Model model) {
+		Player player = playerRepo.findById((long) id)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid user Id: "+ id));
-		model.addAttribute("player", p);
-		return "showOffenseStats";		
+		OffensiveStats stats = oRepo.findByPlayerid(player.getPlayerid());
+		model.addAttribute("stats", stats);
+	
+		return "showOffensiveStats";		
 	}
 	
-	
+	/*@GetMapping("/viewOrderDetails/{id}")
+	public String viewOrderDetails(@PathVariable("id") long id, User user, Model model) {
+		OrderItems oi = oiRepo.findById(id);
+		model.addAttribute("user", user);
+		model.addAttribute("orderitems", oi);
+		return "viewOrderDetails";
+	}*/
 	
 }
