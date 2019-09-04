@@ -19,7 +19,7 @@ import net.drewdouglass.Entity.OffensiveStats;
 
 @Controller
 @RequestMapping
-@SessionAttributes("player")
+@SessionAttributes({"player"})
 public class PlayerController {
 	
 	  @ModelAttribute("player")
@@ -62,11 +62,19 @@ public class PlayerController {
 	
 	@RequestMapping("/offenseStats/{id}")
 	public String showOffensiveStatsByPlayer(@PathVariable("id") long id, Model model) {
-		Player player = playerRepo.findById((long) id)
-				.orElseThrow(() -> new IllegalArgumentException("Invalid user Id: "+ id));
-		OffensiveStats stats = oRepo.findByPlayerid(player.getPlayerid());
-		model.addAttribute("stats", stats);
+		Player player = playerRepo.findByPlayerid(id);
+		OffensiveStats stats = oRepo.findById(id);
+		
+		double Fgpct = stats.getFieldgoalsmade() / stats.getFieldgoalstaken();
 	
+		System.out.print("Field goal percent: " + Fgpct);
+		model.addAttribute("player", player);
+		model.addAttribute("stats", stats);
+		model.addAttribute("fgpct", Fgpct);
+		
+		
+		
+		System.out.print(player.toString());
 		return "showOffensiveStats";		
 	}
 	

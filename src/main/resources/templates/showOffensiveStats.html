@@ -6,10 +6,11 @@
 </head>
 <body>
 
-<table>
-<thead>
-<tr>
-<th>FG's Made: </th>
+	<table>
+	<thead>
+		<tr>
+			<th>Player: </th>
+			<th>FG's Made: </th>
 			<th>FG's Taken: </th>
 			<th>FT's Made: </th>
 			<th>FT's Taken: </th>
@@ -22,7 +23,7 @@
 	</tr>	
 	</thead>	
 		<tr th:each="stats : ${stats}">
-		<td th:text="${stats.getId()}"/>
+		<td th:text="${player.getLastname()}" />	
 		<td th:text="${stats.getFieldgoalsmade()}"/>		
 		<td th:text="${stats.getFieldgoalstaken()}"/>
 		<td th:text="${stats.getFreethrowsmade()}"/>
@@ -33,6 +34,6 @@
 		<td th:text="${stats.getFtpct()}"/>
 		<td th:text="${stats.getTppct()}"/> 
 		</tr>
-		</table>
+	</table>
 </body>
 </html>

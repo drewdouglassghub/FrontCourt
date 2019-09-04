@@ -10,5 +10,7 @@ import net.drewdouglass.Entity.Player;
 @Repository
 public interface PlayerRepository extends JpaRepository<Player, Long>{
 
+	
 	Player findByPlayerid(long playerid);
+	
 }

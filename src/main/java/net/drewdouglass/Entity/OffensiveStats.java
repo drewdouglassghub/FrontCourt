@@ -14,7 +14,7 @@ public class OffensiveStats {
 
 	@Id
 	@Column(name="ID")
-	private int id;
+	private long id;
 	@Column(name="fieldgoalsmade")
 	private int fieldgoalsmade;
 	@Column(name="fieldgoalstaken")
@@ -35,7 +35,7 @@ public class OffensiveStats {
 	private double tppct;
 	
 	@OneToOne(fetch=FetchType.LAZY, optional = false)
-	@JoinColumn(name="PLAYER_ID")
+	@JoinColumn(name="PLAYERID")
 	private Player playerid;
 	
 	public OffensiveStats() {
@@ -43,7 +43,7 @@ public class OffensiveStats {
 	};
 	
 	public OffensiveStats(int fieldgoalsmade, int fieldgoalstaken, int freethrowsmade, int freethrowstaken,
-			int threepointersmade, int threepointerstaken, double fgpct, double ftpct, double tppct, Player playerid) {
+			int threepointersmade, int threepointerstaken, double fgpct, double ftpct, double tppct) {
 		super();
 		this.fieldgoalsmade = fieldgoalsmade;
 		this.fieldgoalstaken = fieldgoalstaken;
@@ -54,7 +54,7 @@ public class OffensiveStats {
 		this.fgpct = fgpct;
 		this.ftpct = ftpct;
 		this.tppct = tppct;
-		this.playerid = playerid;
+		
 	}
 	
 	public Player getPlayer() {
@@ -65,11 +65,11 @@ public class OffensiveStats {
 		this.playerid = playerid;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -121,7 +121,7 @@ public class OffensiveStats {
 		this.threepointerstaken = threepointerstaken;
 	}
 
-	public double getFgpct() {
+	public double getFgpct() {		
 		return fgpct;
 	}
 
