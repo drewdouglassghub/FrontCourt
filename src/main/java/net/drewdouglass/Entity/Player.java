@@ -1,15 +1,16 @@
 package net.drewdouglass.Entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SecondaryTable;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Entity
@@ -36,6 +37,11 @@ public class Player {
 	@Column(name="WEIGHT")
 	private String weight;
 	
+	
+	@OneToOne(fetch=FetchType.LAZY,
+			cascade=CascadeType.ALL,
+			mappedBy="playerid")
+	private OffensiveStats offensiveStats;
 	
 	//public byte[] playerpic;
 	
@@ -86,13 +92,13 @@ public class Player {
 	}
 	
 	
-	/*public ShootingStats getShootingStats(){
-		return stats;
+	public OffensiveStats getShootingStats(){
+		return offensiveStats;
 	}
 	
-	public void setShootingStats(ShootingStats stats) {
-		this.stats = stats;
-	}*/
+	public void setOffensiveStats(OffensiveStats stats) {
+		this.offensiveStats = stats;
+	}
 
 	public long getAge() {
 		return age;

@@ -1,41 +1,51 @@
 package net.drewdouglass.Entity;
 
+import java.beans.Transient;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Formula;
+
 @Entity
-@Table(name="SHOOTING_STATS")
+@Table(name="OFFENSIVE_STATS")
 public class OffensiveStats {
 
 	@Id
-	@Column(name="ID")
-	private long id;
-	@Column(name="fieldgoalsmade")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long oid;
+	@Column(name="fieldgoalsmade", columnDefinition="int default '0'")
 	private int fieldgoalsmade;
-	@Column(name="fieldgoalstaken")
+	@Column(name="fieldgoalstaken", columnDefinition="int default '0'")
 	private int fieldgoalstaken;
-	@Column(name="freethrowsmade")
+	@Column(name="freethrowsmade", columnDefinition="int default '0'")
 	private int freethrowsmade;
-	@Column(name="freethrowstaken")
+	@Column(name="freethrowstaken", columnDefinition="int default '0'")
 	private int freethrowstaken;
-	@Column(name="threepointersmade")
+	@Column(name="threepointersmade", columnDefinition="int default '0'")
 	private int threepointersmade;
-	@Column(name="threepointerstaken")
+	@Column(name="threepointerstaken", columnDefinition="int default '0'")
 	private int threepointerstaken;
-	@Column(name="fgpct")
+	
+	
+	@Formula("fieldgoalsmade/fieldgoalstaken*100")
 	private double fgpct;
-	@Column(name="ftpct")
+	
+	@Formula("freethrowsmade/freethrowstaken*100")
 	private double ftpct;
-	@Column(name="tppct")
+	
+	@Formula("threepointersmade/threepointerstaken*100")
 	private double tppct;
 	
 	@OneToOne(fetch=FetchType.LAZY, optional = false)
-	@JoinColumn(name="PLAYERID")
+	@JoinColumn(name="PLAYERID", nullable=false)
 	private Player playerid;
 	
 	public OffensiveStats() {
@@ -43,7 +53,7 @@ public class OffensiveStats {
 	};
 	
 	public OffensiveStats(int fieldgoalsmade, int fieldgoalstaken, int freethrowsmade, int freethrowstaken,
-			int threepointersmade, int threepointerstaken, double fgpct, double ftpct, double tppct) {
+			int threepointersmade, int threepointerstaken) {
 		super();
 		this.fieldgoalsmade = fieldgoalsmade;
 		this.fieldgoalstaken = fieldgoalstaken;
@@ -51,27 +61,23 @@ public class OffensiveStats {
 		this.freethrowstaken = freethrowstaken;
 		this.threepointersmade = threepointersmade;
 		this.threepointerstaken = threepointerstaken;
-		this.fgpct = fgpct;
-		this.ftpct = ftpct;
-		this.tppct = tppct;
-		
 	}
 	
 	public Player getPlayer() {
 		return playerid;
 	}
 
-	public void setPlayer(Player playerid) {
-		this.playerid = playerid;
+	public void setPlayer(Player player) {
+		this.playerid = player;
 	}
 
-	public long getId() {
-		return id;
+	public long getOid() {
+		return oid;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
+	/*public void setPlayerid(long id) {
+		this.playerid = id;
+	}*/
 
 	public int getFieldgoalsmade() {
 		return fieldgoalsmade;
@@ -121,33 +127,38 @@ public class OffensiveStats {
 		this.threepointerstaken = threepointerstaken;
 	}
 
+	@Transient
 	public double getFgpct() {		
 		return fgpct;
 	}
-
+	@Transient
 	public void setFgpct(double fgpct) {
 		this.fgpct = fgpct;
 	}
 
+	@Transient
 	public double getFtpct() {
 		return ftpct;
 	}
 
+	@Transient
 	public void setFtpct(double ftpct) {
 		this.ftpct = ftpct;
 	}
 
+	@Transient
 	public double getTppct() {
 		return tppct;
 	}
 
+	@Transient
 	public void setTppct(double tppct) {
 		this.tppct = tppct;
 	}
 
 	@Override
 	public String toString() {
-		return "ShootingStats [id=" + id + ", fieldgoalsmade=" + fieldgoalsmade + ", fieldgoalstaken=" + fieldgoalstaken
+		return "ShootingStats [id=" + oid + ", fieldgoalsmade=" + fieldgoalsmade + ", fieldgoalstaken=" + fieldgoalstaken
 				+ ", freethrowsmade=" + freethrowsmade + ", freethrowstaken=" + freethrowstaken + ", threepointersmade="
 				+ threepointersmade + ", threepointerstaken=" + threepointerstaken + ", fgpct=" + fgpct + ", ftpct="
 				+ ftpct + ", tppct=" + tppct + "]";

@@ -52,6 +52,10 @@ public class PlayerController {
 		System.out.println("saving new player");
 		System.out.println(p.toString());
 		playerRepo.save(p);
+
+		OffensiveStats o = new OffensiveStats();
+		oRepo.save(o);
+		
 		model.addAttribute("player", playerRepo.findAll());
 		return "viewAllPlayers";
 	}
@@ -64,16 +68,14 @@ public class PlayerController {
 	public String showOffensiveStatsByPlayer(@PathVariable("id") long id, Model model) {
 		Player player = playerRepo.findByPlayerid(id);
 		OffensiveStats stats = oRepo.findById(id);
-		
-		double Fgpct = stats.getFieldgoalsmade() / stats.getFieldgoalstaken();
 	
-		System.out.print("Field goal percent: " + Fgpct);
+		System.out.print(stats.toString());
+	
+		oRepo.save(stats);
+		
 		model.addAttribute("player", player);
 		model.addAttribute("stats", stats);
-		model.addAttribute("fgpct", Fgpct);
-		
-		
-		
+
 		System.out.print(player.toString());
 		return "showOffensiveStats";		
 	}
