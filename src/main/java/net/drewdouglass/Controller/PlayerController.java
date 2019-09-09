@@ -1,5 +1,7 @@
 package net.drewdouglass.Controller;
 
+import javax.persistence.EntityManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,10 +53,15 @@ public class PlayerController {
 	public String addNewPlayer(@ModelAttribute Player p, Model model) {
 		System.out.println("saving new player");
 		System.out.println(p.toString());
-		playerRepo.save(p);
-
+		
 		OffensiveStats o = new OffensiveStats();
-		oRepo.save(o);
+
+		System.out.println(o.toString());
+		p.setOffensiveStats(o);
+		o.setPlayer(p);
+		
+		playerRepo.save(p);		
+
 		
 		model.addAttribute("player", playerRepo.findAll());
 		return "viewAllPlayers";

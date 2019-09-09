@@ -40,7 +40,7 @@ public class Player {
 	
 	@OneToOne(fetch=FetchType.LAZY,
 			cascade=CascadeType.ALL,
-			mappedBy="playerid")
+			mappedBy="player")
 	private OffensiveStats offensiveStats;
 	
 	//public byte[] playerpic;
@@ -92,7 +92,7 @@ public class Player {
 	}
 	
 	
-	public OffensiveStats getShootingStats(){
+	public OffensiveStats getOffensiveStats(){
 		return offensiveStats;
 	}
 	

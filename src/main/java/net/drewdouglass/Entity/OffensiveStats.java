@@ -34,26 +34,28 @@ public class OffensiveStats {
 	@Column(name="threepointerstaken", columnDefinition="int default '0'")
 	private int threepointerstaken;
 	
+	@Column(name="fgpct", columnDefinition="Double default '0.0'")
+	@Formula(value="fieldgoalsmade/fieldgoalstaken*100")
+	private Double fgpct;
 	
-	@Formula("fieldgoalsmade/fieldgoalstaken*100")
-	private double fgpct;
+	@Column(name="ftpct", columnDefinition="Double default '0.0'")
+	@Formula(value="freethrowsmade/freethrowstaken*100")
+	private Double ftpct;
 	
-	@Formula("freethrowsmade/freethrowstaken*100")
-	private double ftpct;
-	
-	@Formula("threepointersmade/threepointerstaken*100")
-	private double tppct;
+	@Column(name="tppct", columnDefinition="Double default '0.0'")
+	@Formula(value="threepointersmade/threepointerstaken*100")
+	private Double tppct;
 	
 	@OneToOne(fetch=FetchType.LAZY, optional = false)
-	@JoinColumn(name="PLAYERID", nullable=false)
-	private Player playerid;
+	@JoinColumn(name="PLAYER", nullable=false)
+	private Player player;
 	
 	public OffensiveStats() {
 		super();
 	};
 	
 	public OffensiveStats(int fieldgoalsmade, int fieldgoalstaken, int freethrowsmade, int freethrowstaken,
-			int threepointersmade, int threepointerstaken) {
+			int threepointersmade, int threepointerstaken, Double fgpct, Double ftpct, Double tppct) {
 		super();
 		this.fieldgoalsmade = fieldgoalsmade;
 		this.fieldgoalstaken = fieldgoalstaken;
@@ -64,11 +66,11 @@ public class OffensiveStats {
 	}
 	
 	public Player getPlayer() {
-		return playerid;
+		return player;
 	}
 
 	public void setPlayer(Player player) {
-		this.playerid = player;
+		this.player = player;
 	}
 
 	public long getOid() {
@@ -127,32 +129,30 @@ public class OffensiveStats {
 		this.threepointerstaken = threepointerstaken;
 	}
 
-	@Transient
-	public double getFgpct() {		
+	public Double getFgpct() {		
 		return fgpct;
 	}
-	@Transient
-	public void setFgpct(double fgpct) {
+
+	public void setFgpct(Double fgpct) {
 		this.fgpct = fgpct;
 	}
 
-	@Transient
-	public double getFtpct() {
+	public Double getFtpct() {
 		return ftpct;
 	}
 
 	@Transient
-	public void setFtpct(double ftpct) {
+	public void setFtpct(Double ftpct) {
 		this.ftpct = ftpct;
 	}
 
 	@Transient
-	public double getTppct() {
+	public Double getTppct() {
 		return tppct;
 	}
 
 	@Transient
-	public void setTppct(double tppct) {
+	public void setTppct(Double tppct) {
 		this.tppct = tppct;
 	}
 
