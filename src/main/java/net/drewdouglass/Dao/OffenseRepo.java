@@ -10,6 +10,5 @@ public interface OffenseRepo extends JpaRepository<OffensiveStats, Long>{
 
 	OffensiveStats findById(long id);
 
-	OffensiveStats findByPlayer(long id);
 
 }

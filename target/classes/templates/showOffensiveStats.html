@@ -45,6 +45,10 @@
 			<span th:text="|Three Point Pct: ${tppct} |"></span>
 		</p>
 
+
+		<span><a th:href="@{/editOffensiveStats/{id}(id=${stats.getOid()})}">Edit Offensive Stats</a></span>
+		
+		
 			<!--  <p>FG's Made: </p>  <span th:text="${stats.getFieldgoalsmade()}"> </span>		
 			<p>FG's Taken: </p>  <span th:text="${stats.getFieldgoalstaken()}"></span>
 			<p>FT's Made: </p>

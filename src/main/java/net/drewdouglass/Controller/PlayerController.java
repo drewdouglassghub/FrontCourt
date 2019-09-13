@@ -1,10 +1,12 @@
 package net.drewdouglass.Controller;
 
 import javax.persistence.EntityManager;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -91,6 +93,26 @@ public class PlayerController {
 		model.addAttribute("ftpct", ftpct);
 		model.addAttribute("tppct", tppct);
 		return "showOffensiveStats";		
+	}
+	
+	@GetMapping("/editOffensiveStats/{id}")
+	public String showUpdateOStats(@PathVariable("id") long id, Model model) {
+	
+
+		OffensiveStats stats = oRepo.findById(id);
+		
+		model.addAttribute(stats);
+		
+		return "editOffensiveStats"; 
+		
+	}
+	
+	@PostMapping("/updateOffensiveStats/{id}")
+	public String updateOffensiveStats(@PathVariable("id") long id, @Valid OffensiveStats stats, BindingResult result, Model model) {
+		
+		oRepo.save(stats);
+		
+		return "viewAllPlayers";
 	}
 	
 	/*@GetMapping("/viewOrderDetails/{id}")
