@@ -56,12 +56,10 @@ public class PlayerController {
 		
 		OffensiveStats o = new OffensiveStats();
 
-		System.out.println(o.toString());
 		p.setOffensiveStats(o);
-		o.setPlayer(p);
 		
+		o.setPlayer(p);
 		playerRepo.save(p);		
-
 		
 		model.addAttribute("player", playerRepo.findAll());
 		return "viewAllPlayers";
@@ -74,16 +72,24 @@ public class PlayerController {
 	@RequestMapping("/offenseStats/{id}")
 	public String showOffensiveStatsByPlayer(@PathVariable("id") long id, Model model) {
 		Player player = playerRepo.findByPlayerid(id);
+		
+		System.out.println(player.toString());
+		
 		OffensiveStats stats = oRepo.findById(id);
 	
-		System.out.print(stats.toString());
-	
-		oRepo.save(stats);
+		double fgpct = 0.0;
+		double ftpct = 0.0;
+		double tppct = 0.0;
 		
-		model.addAttribute("player", player);
+		fgpct = (double) stats.getFieldgoalsmade() / stats.getFieldgoalstaken() * 100;
+		ftpct = (double) stats.getFreethrowsmade() / stats.getFreethrowstaken() * 100;
+		tppct = (double) stats.getThreepointersmade() / stats.getThreepointerstaken() * 100;
+		
+		model.addAttribute("player", player);		
 		model.addAttribute("stats", stats);
-
-		System.out.print(player.toString());
+		model.addAttribute("fgpct", fgpct);
+		model.addAttribute("ftpct", ftpct);
+		model.addAttribute("tppct", tppct);
 		return "showOffensiveStats";		
 	}
 	

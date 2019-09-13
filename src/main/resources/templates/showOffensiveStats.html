@@ -6,34 +6,66 @@
 </head>
 <body>
 
-	<table>
-	<thead>
-		<tr>
-			<th>Player: </th>
-			<th>FG's Made: </th>
-			<th>FG's Taken: </th>
-			<th>FT's Made: </th>
-			<th>FT's Taken: </th>
-			<th>TP's Made: </th>
-			<th>TP's Taken: </th>
-			<th>Field Goal Pct: </th>
-			<th>Free Throw Pct: </th>
-			<th>Three Point Pct: </th> 
-			
-	</tr>	
-	</thead>	
-		<tr th:each="stats : ${stats}">
-		<td th:text="${player.getLastname()}" />	
-		<td th:text="${stats.getFieldgoalsmade()}"/>		
-		<td th:text="${stats.getFieldgoalstaken()}"/>
+<p><span th:text="${player.getLastname()}"></span> <p/>
+
+		
+		<p>
+			<span th:text="|FG's Made: ${stats.getFieldgoalsmade()}  |"></span>
+		</p>	
+		
+		<p>
+			<span th:text="|FG's Taken: ${stats.getFieldgoalstaken()}  |"></span>
+		</p>
+		
+		<p>
+			<span th:text="|FT's Made: ${stats.getFreethrowsmade()}  |"></span>
+		</p>
+		
+		<p>
+			<span th:text="|FT's Taken: ${stats.getFreethrowstaken()}  |"></span>
+		</p>
+		
+		<p>
+			<span th:text="|TP's Made: ${stats.getThreepointersmade()}  |"></span>
+		</p>
+		
+		<p>
+			<span th:text="|TP's Taken: ${stats.getThreepointerstaken()}  |"></span>
+		</p>
+
+		<p>
+			<span th:text="|Field Goal Pct: ${fgpct} |"></span>
+		</p>
+		
+		<p>
+			<span th:text="|Free Throw Pct: ${ftpct} |"></span>
+		</p>
+		
+		<p>
+			<span th:text="|Three Point Pct: ${tppct} |"></span>
+		</p>
+
+			<!--  <p>FG's Made: </p>  <span th:text="${stats.getFieldgoalsmade()}"> </span>		
+			<p>FG's Taken: </p>  <span th:text="${stats.getFieldgoalstaken()}"></span>
+			<p>FT's Made: </p>
+			<p>FT's Taken: </p>
+			<p>TP's Made: </p>
+			<p>TP's Taken: </p>
+			<p>Field Goal Pct: <p>
+			<p>Free Throw Pct: </p>
+			<p>Three Point Pct: </p> 
+
+		
+		
+		
+		
 		<td th:text="${stats.getFreethrowsmade()}"/>
 		<td th:text="${stats.getFreethrowstaken()}"/>
 		<td th:text="${stats.getThreepointersmade()}"/>
 		<td th:text="${stats.getThreepointerstaken()}"/>
-		<td th:text="${stats.getFgpct()}"/>
-		<td th:text="${stats.getFtpct()}"/>
-		<td th:text="${stats.getTppct()}"/> 
-		</tr>
-	</table>
+		<td th:text="${fgpct}"/>
+		 <td th:text="${stats.getFtpct()}"/>
+		<td th:text="${stats.getTppct()}"/> -->
+	
 </body>
 </html>

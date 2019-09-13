@@ -34,17 +34,14 @@ public class OffensiveStats {
 	@Column(name="threepointerstaken", columnDefinition="int default '0'")
 	private int threepointerstaken;
 	
-	@Column(name="fgpct", columnDefinition="Double default '0.0'")
-	@Formula(value="fieldgoalsmade/fieldgoalstaken*100")
+	/*@Formula("fieldgoalsmade/fieldgoalstaken*100")
 	private Double fgpct;
 	
-	@Column(name="ftpct", columnDefinition="Double default '0.0'")
-	@Formula(value="freethrowsmade/freethrowstaken*100")
+	@Formula("freethrowsmade/freethrowstaken*100")
 	private Double ftpct;
-	
-	@Column(name="tppct", columnDefinition="Double default '0.0'")
-	@Formula(value="threepointersmade/threepointerstaken*100")
-	private Double tppct;
+
+	@Formula("threepointersmade/threepointerstaken*100")
+	private Double tppct;*/
 	
 	@OneToOne(fetch=FetchType.LAZY, optional = false)
 	@JoinColumn(name="PLAYER", nullable=false)
@@ -55,7 +52,7 @@ public class OffensiveStats {
 	};
 	
 	public OffensiveStats(int fieldgoalsmade, int fieldgoalstaken, int freethrowsmade, int freethrowstaken,
-			int threepointersmade, int threepointerstaken, Double fgpct, Double ftpct, Double tppct) {
+			int threepointersmade, int threepointerstaken) {
 		super();
 		this.fieldgoalsmade = fieldgoalsmade;
 		this.fieldgoalstaken = fieldgoalstaken;
@@ -129,14 +126,17 @@ public class OffensiveStats {
 		this.threepointerstaken = threepointerstaken;
 	}
 
+	/*@Transient
 	public Double getFgpct() {		
 		return fgpct;
 	}
 
+	@Transient
 	public void setFgpct(Double fgpct) {
 		this.fgpct = fgpct;
 	}
 
+	@Transient
 	public Double getFtpct() {
 		return ftpct;
 	}
@@ -154,17 +154,12 @@ public class OffensiveStats {
 	@Transient
 	public void setTppct(Double tppct) {
 		this.tppct = tppct;
-	}
+	}*/
 
 	@Override
 	public String toString() {
 		return "ShootingStats [id=" + oid + ", fieldgoalsmade=" + fieldgoalsmade + ", fieldgoalstaken=" + fieldgoalstaken
 				+ ", freethrowsmade=" + freethrowsmade + ", freethrowstaken=" + freethrowstaken + ", threepointersmade="
-				+ threepointersmade + ", threepointerstaken=" + threepointerstaken + ", fgpct=" + fgpct + ", ftpct="
-				+ ftpct + ", tppct=" + tppct + "]";
+				+ threepointersmade + ", threepointerstaken=" + threepointerstaken +  "]";
 	}
-
-	
-	
-	
 }
