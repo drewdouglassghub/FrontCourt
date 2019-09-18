@@ -9,7 +9,7 @@
 <header>Update Player Offensive Stats</header>
 
 <div class="container">
-<form action="#" th:action="@{/updateOffensiveStats/{id}(id=${stats.oid)}" th:object="${stats}" method="post">   
+<form action="#" th:action="@{/update/{id}(id=${stats.oid)}" th:object="${stats}" method="post">   
     
 	
 	Field Goals Made: <span th:text="${stats.getFieldgoalsmade()}" ></span>
@@ -53,8 +53,7 @@
 	<label for="quantityThreePointersTaken">Quantity:</label>
 	<input type="number" th:field="*{quantityThreePointersTaken}" id="quantityThreePointersTaken">
 	<span th:if="${#fields.hasErrors('quantityThreePointersTaken')}" th:errors="*{quantityThreePointersTaken}"></span><br/>
-	
-		<input type="hidden" th:field="*{playerId}" id="playerId">
+
 	<input type="hidden" th:field="*{oId}" id="oId">
 
 	

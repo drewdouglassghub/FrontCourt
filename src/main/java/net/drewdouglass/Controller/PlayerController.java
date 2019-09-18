@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+
 import net.drewdouglass.Dao.OffenseRepo;
 import net.drewdouglass.Dao.PlayerRepository;
 import net.drewdouglass.Entity.Player;
@@ -96,22 +97,21 @@ public class PlayerController {
 	}
 	
 	@GetMapping("/editOffensiveStats/{id}")
-	public String showUpdateOStats(@PathVariable("id") long id, Model model) {
-	
+	public String showOffenseUpdateForm(@PathVariable("id") long id, Model model) {
 
 		OffensiveStats stats = oRepo.findById(id);
 		
 		model.addAttribute(stats);
 		
-		return "editOffensiveStats"; 
+		return "updateOffensiveStats"; 
 		
 	}
 	
 	@PostMapping("/updateOffensiveStats/{id}")
-	public String updateOffensiveStats(@PathVariable("id") long id, @Valid OffensiveStats stats, BindingResult result, Model model) {
+	public String updateOffensiveStats(@PathVariable("id") long id, @Valid OffensiveStats offensiveStats, BindingResult result, Model model) {
 		
-		oRepo.save(stats);
-		
+		oRepo.save(offensiveStats);
+		model.addAttribute("player", playerRepo.findAll());
 		return "viewAllPlayers";
 	}
 	

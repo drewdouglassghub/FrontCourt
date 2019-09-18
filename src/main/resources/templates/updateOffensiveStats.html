@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Update Offensive Stats</title>
+</head>
+<body>
+
+<header>Update Player Offensive Stats</header>
+<br/>
+
+<div class="container">
+<form action="#" th:action="@{/updateOffensiveStats/{id}(id=${oid})}" th:object="${offensiveStats}" method="post">   
+    
+	
+	Field Goals:<span th:text="${fieldgoalsmade}" ></span>
+	<br/>
+	
+	<label for="feldgoalstaken">Taken:</label>
+	<input type="number" th:field="*{fieldgoalstaken}" id="quantityFieldGoalsTaken">
+	<span th:if="${#fields.hasErrors('fieldgoalstaken')}" th:errors="*{fieldgoalstaken}"></span><br/>
+	
+	<label for="quantityFieldGoalsMade">Made:</label>
+	<input type="number" th:field="*{fieldgoalsmade}" id="fieldgoalsmade">
+	<span th:if="${#fields.hasErrors('fieldgoalsmade')}" th:errors="*{fieldgoalsmade}"></span><br/>
+
+	<br/>
+	Free Throws: <span th:text="${freethrowsmade}" ></span>
+	<br/>
+	
+	<label for="freethrowstaken">Taken:</label>
+	<input type="number" th:field="*{freethrowstaken}" id="freethrowstaken">
+	<span th:if="${#fields.hasErrors('freethrowstaken')}" th:errors="*{freethrowstaken}"></span><br/>
+	
+	<label for="freethrowsmade">Made:</label>
+	<input type="number" th:field="*{freethrowsmade}" id="freethrowsmade">
+	<span th:if="${#fields.hasErrors('freethrowsmade')}" th:errors="*{freethrowsmade}"></span><br/>	
+	
+	<br/>
+	Three Pointers Made: <span th:text="${threepointersmade}" ></span>
+	<br/>
+	
+	<label for="threepointerstaken">Taken:</label>
+	<input type="number" th:field="*{threepointerstaken}" id="threepointerstaken">
+	<span th:if="${#fields.hasErrors('threepointerstaken')}" th:errors="*{threepointerstaken}"></span><br/>
+	
+	<label for="threepointersmade">Made:</label>
+	<input type="number" th:field="*{threepointersmade}" id="threepointersmade">
+	<span th:if="${#fields.hasErrors('threepointersmade')}" th:errors="*{threepointersmade}"></span><br/>
+	
+
+
+	<br/>
+	<input type="hidden" th:field="*{oid}" id="oid">
+
+	
+    <input type="submit" value="Update Stats">   
+    
+</form>
+<a href="/viewAllPlayers">Home</a> <br />
+</div>
+
+</body>
+</html>
