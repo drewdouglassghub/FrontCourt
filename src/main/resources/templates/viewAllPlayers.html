@@ -42,7 +42,7 @@
 					<td><a
 						th:href="@{/editPlayer/{id}(playerid=${currentPlayer.getPlayerid()})}">Edit</a></td>
 					<td><a
-						th:href="@{/deletePlayer/{id}(playerid=${currentPlayer.getPlayerid()})}">Delete</a></td>
+						th:href="@{/deletePlayer/{id}(id=${currentPlayer.getPlayerid()})}">Delete</a></td>
 					<!-- <td th:text="${currentPlayer.playerpic}"/> -->
 
 				</tr>

@@ -19,8 +19,6 @@ import net.drewdouglass.Dao.PlayerRepository;
 import net.drewdouglass.Entity.Player;
 import net.drewdouglass.Entity.OffensiveStats;
 
-
-
 @Controller
 @RequestMapping
 @SessionAttributes({"player"})
@@ -116,9 +114,8 @@ public class PlayerController {
 	}
 	
 	@GetMapping("/deletePlayer/{id}")
-	public String deleteUser(@PathVariable("id") long id, Model model) {
-	    Player p = playerRepo.findById((long) id)
-	      .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+	public String deletePlayer(@PathVariable("id") long id, Model model) {
+	    Player p = playerRepo.findByPlayerid((long) id);
 	    playerRepo.delete(p);
 	    model.addAttribute("player", playerRepo.findAll());
 		return "viewAllPlayers";
