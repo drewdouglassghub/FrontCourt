@@ -49,9 +49,10 @@ public class Player {
 		
 	}
 
-	public Player(long jerseynum, String firstname, String lastname, long age, String playerpos,
+	public Player(long playerid, long jerseynum, String firstname, String lastname, long age, String playerpos,
 			String height, String weight) {
 		super();
+		this.playerid = playerid;
 		this.jerseynum = jerseynum;
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -60,6 +61,10 @@ public class Player {
 		this.height = height;
 		this.weight = weight;
 	
+	}
+	
+	public void setPlayerid(long playerid) {
+		
 	}
 
 	public long getPlayerid() {

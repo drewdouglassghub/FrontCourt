@@ -1,7 +1,5 @@
 package net.drewdouglass.Entity;
 
-import java.beans.Transient;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Formula;
 
 @Entity
 @Table(name="OFFENSIVE_STATS")
@@ -51,9 +48,10 @@ public class OffensiveStats {
 		super();
 	};
 	
-	public OffensiveStats(int fieldgoalsmade, int fieldgoalstaken, int freethrowsmade, int freethrowstaken,
+	public OffensiveStats(long oid, int fieldgoalsmade, int fieldgoalstaken, int freethrowsmade, int freethrowstaken,
 			int threepointersmade, int threepointerstaken) {
 		super();
+		this.oid = oid;
 		this.fieldgoalsmade = fieldgoalsmade;
 		this.fieldgoalstaken = fieldgoalstaken;
 		this.freethrowsmade = freethrowsmade;
@@ -74,9 +72,9 @@ public class OffensiveStats {
 		return oid;
 	}
 
-	/*public void setPlayerid(long id) {
-		this.playerid = id;
-	}*/
+	public void setOid(long oid) {
+		this.oid = oid;
+	}
 
 	public int getFieldgoalsmade() {
 		return fieldgoalsmade;

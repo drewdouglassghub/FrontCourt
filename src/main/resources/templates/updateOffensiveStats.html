@@ -10,7 +10,7 @@
 <br/>
 
 <div class="container">
-<form action="#" th:action="@{/updateOffensiveStats/{id}(id=${oid})}" th:object="${offensiveStats}" method="post">   
+<form action="#" th:action="@{/updateOffensiveStats/{id}(id=${offensiveStats.getOid()})}" th:object="${offensiveStats}" method="post">   
     
 	
 	Field Goals:<span th:text="${fieldgoalsmade}" ></span>
@@ -51,13 +51,14 @@
 
 
 	<br/>
-	<input type="hidden" th:field="*{oid}" id="oid">
+	<input type="hidden" th:value="*{oid}" th:attr="name='oid'">
 
 	
     <input type="submit" value="Update Stats">   
     
-</form>
-<a href="/viewAllPlayers">Home</a> <br />
+	</form>
+	<br/>
+	<a href="/viewAllPlayers">Team Home</a> <br />
 </div>
 
 </body>

@@ -1,6 +1,5 @@
 package net.drewdouglass.Controller;
 
-import javax.persistence.EntityManager;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +37,7 @@ public class PlayerController {
 	@Autowired
 	OffenseRepo oRepo;
 	
-	@GetMapping("/viewAll")
+	@GetMapping("/viewAllPlayers")
 	public String viewAllPlayers(Model model) {
 		model.addAttribute("player", playerRepo.findAll());
 		return "viewAllPlayers";
@@ -48,8 +47,8 @@ public class PlayerController {
 	@GetMapping("/addPlayer")
 	public String addNewPlayer(Model model) {
 		Player p = new Player();
-		model.addAttribute("newPlayer", p);
-		return "addPlayer";
+		model.addAttribute("player", p);
+		return "/addPlayer";
 	}
 	
 	@PostMapping("/addPlayer")
@@ -58,10 +57,8 @@ public class PlayerController {
 		System.out.println(p.toString());
 		
 		OffensiveStats o = new OffensiveStats();
-
-		p.setOffensiveStats(o);
-		
 		o.setPlayer(p);
+		p.setOffensiveStats(o);
 		playerRepo.save(p);		
 		
 		model.addAttribute("player", playerRepo.findAll());
@@ -72,27 +69,20 @@ public class PlayerController {
 	
 	/* ***************************** Offensive stat controls  *************************************** */
 	
-	@RequestMapping("/offenseStats/{id}")
+	@GetMapping("/offenseStats/{id}")
 	public String showOffensiveStatsByPlayer(@PathVariable("id") long id, Model model) {
+		
 		Player player = playerRepo.findByPlayerid(id);
-		
-		System.out.println(player.toString());
-		
 		OffensiveStats stats = oRepo.findById(id);
 	
-		double fgpct = 0.0;
-		double ftpct = 0.0;
-		double tppct = 0.0;
-		
-		fgpct = (double) stats.getFieldgoalsmade() / stats.getFieldgoalstaken() * 100;
-		ftpct = (double) stats.getFreethrowsmade() / stats.getFreethrowstaken() * 100;
-		tppct = (double) stats.getThreepointersmade() / stats.getThreepointerstaken() * 100;
+		System.out.println(player.toString());
+		System.out.println(stats.toString());
 		
 		model.addAttribute("player", player);		
 		model.addAttribute("stats", stats);
-		model.addAttribute("fgpct", fgpct);
-		model.addAttribute("ftpct", ftpct);
-		model.addAttribute("tppct", tppct);
+		model.addAttribute("fgpct", findFgPct(stats.getFieldgoalsmade(), stats.getFieldgoalstaken()));
+		model.addAttribute("ftpct", findFtPct(stats.getFreethrowsmade(), stats.getFreethrowstaken()));
+		model.addAttribute("tppct", findTpPct(stats.getThreepointersmade(), stats.getThreepointerstaken()));
 		return "showOffensiveStats";		
 	}
 	
@@ -109,18 +99,51 @@ public class PlayerController {
 	
 	@PostMapping("/updateOffensiveStats/{id}")
 	public String updateOffensiveStats(@PathVariable("id") long id, @Valid OffensiveStats offensiveStats, BindingResult result, Model model) {
+
+		OffensiveStats stats = offensiveStats;
+		System.out.println(stats.toString());
+		oRepo.save(stats);
 		
-		oRepo.save(offensiveStats);
-		model.addAttribute("player", playerRepo.findAll());
+		double fgpct = findFgPct(stats.getFieldgoalsmade(), stats.getFieldgoalstaken());
+		double ftpct = findFtPct(stats.getFreethrowsmade(), stats.getFreethrowstaken());
+		double tppct = findTpPct(stats.getThreepointersmade(), stats.getThreepointerstaken());	
+		model.addAttribute("player", playerRepo.findByPlayerid(id));
+		model.addAttribute("stats", stats);	
+		model.addAttribute("fgpct", fgpct);
+		model.addAttribute("ftpct", ftpct);
+		model.addAttribute("tppct", tppct);
+		return "showOffensiveStats";
+	}
+	
+	@GetMapping("/deletePlayer/{id}")
+	public String deleteUser(@PathVariable("id") long id, Model model) {
+	    Player p = playerRepo.findById((long) id)
+	      .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+	    playerRepo.delete(p);
+	    model.addAttribute("player", playerRepo.findAll());
 		return "viewAllPlayers";
 	}
 	
-	/*@GetMapping("/viewOrderDetails/{id}")
-	public String viewOrderDetails(@PathVariable("id") long id, User user, Model model) {
-		OrderItems oi = oiRepo.findById(id);
-		model.addAttribute("user", user);
-		model.addAttribute("orderitems", oi);
-		return "viewOrderDetails";
-	}*/
+//********* Controller Methods *************
 	
+	public double findFgPct(double double1, double double2) {
+		
+		double fgpct = 0;		
+		fgpct = double1 / double2 * 100;	
+		return fgpct;	
+	}
+	
+public double findFtPct(double double1, double double2) {
+		
+		double ftpct = 0;		
+		ftpct = double1 / double2 * 100;	
+		return ftpct;	
+	}
+
+public double findTpPct(double double1, double double2) {
+	
+	double tppct = 0;		
+	tppct = double1 / double2 * 100;	
+	return tppct;	
+}
 }
