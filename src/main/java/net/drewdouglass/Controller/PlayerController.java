@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import net.drewdouglass.Dao.OffenseRepo;
 import net.drewdouglass.Dao.PlayerRepository;
+import net.drewdouglass.Dao.TeamRepository;
 import net.drewdouglass.Dao.UserRepository;
 import net.drewdouglass.Entity.Player;
 import net.drewdouglass.Entity.OffensiveStats;
@@ -28,6 +29,9 @@ public class PlayerController {
 	public Player setUpPlayerForm() {
 		return new Player();
 	}
+	
+	@Autowired
+	TeamRepository teamRepo;
 
 	@Autowired
 	UserRepository userRepo;
