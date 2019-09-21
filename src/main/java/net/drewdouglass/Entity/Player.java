@@ -23,7 +23,7 @@ public class Player {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long playerid;		
 	@Column(name="JERSEYNUM")
-	private long jerseynum;	
+	private int jerseynum;	
 	@Column(name="FIRSTNAME")
 	private String firstname;
 	@Column(name="LASTNAME")
@@ -49,7 +49,7 @@ public class Player {
 		
 	}
 
-	public Player(long playerid, long jerseynum, String firstname, String lastname, long age, String playerpos,
+	public Player(long playerid, int jerseynum, String firstname, String lastname, long age, String playerpos,
 			String height, String weight) {
 		super();
 		this.playerid = playerid;
@@ -72,7 +72,7 @@ public class Player {
 	}
 
 
-	public long getJerseynum() {
+	public int getJerseynum() {
 		return jerseynum;
 	}
 

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<!--   <title th:text="${player.getLastName()}"></title>-->
+</head>
+<body>
+
+	<div class="container">
+		<form>
+			<table>
+				<thead>
+					<tr>
+						<th>ID:</th>
+						<th>Jersey #:</th>
+						<th>First:</th>
+						<th>Last:</th>
+						<th>Age:</th>
+						<!-- <th>Picture: </th> -->
+						<th>Position:</th>
+						<th>Height:</th>
+						<th>Weight:</th>
+
+					</tr>
+				</thead>
+				<tr >
+					
+					<td type="hidden" id="${playerid}" />
+					<td th:text="${player.getJerseynum()}" />
+					<td th:text="${player.getFirstname()}" />
+					<td th:text="${player.getLastname()}" />
+					<td th:text="${player.getAge()}" />
+					<td th:text="${player.getPlayerpos()}" />
+					<td th:text="${player.getHeight()}" />
+					<td th:text="${player.getWeight()}" />
+					<td><a
+						th:href="@{/editPlayer/{id}(playerid=${player.getPlayerid()})}">Player</a></td>
+					<td><a
+						th:href="@{/offenseStats/{playerid}(playerid=${player.getPlayerid()})}">Offensive</a></td>
+					<td><a
+						th:href="@{/defenseStats/{playerid}(playerid=${player.getPlayerid()})}">Defensive</a></td>
+					<td><a
+						th:href="@{/deletePlayer/{id}(id=${player.getPlayerid()})}">Delete</a></td>
+			</table>
+		</form>
+	</div>
+
+					<a href="/viewAllPlayers">Team Home</a> <br />
+
+
+</body>
+</html>

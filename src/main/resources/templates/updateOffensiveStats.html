@@ -16,7 +16,7 @@
 	Field Goals:<span th:text="${fieldgoalsmade}" ></span>
 	<br/>
 	
-	<label for="feldgoalstaken">Taken:</label>
+	<label for="fieldgoalstaken">Taken:</label>
 	<input type="number" th:field="*{fieldgoalstaken}" id="quantityFieldGoalsTaken">
 	<span th:if="${#fields.hasErrors('fieldgoalstaken')}" th:errors="*{fieldgoalstaken}"></span><br/>
 	

@@ -8,19 +8,18 @@
 
 	<h1>Add a Player</h1>
 	
-	<form th:object="${newPlayer}" th:action="@{/addPlayer}" method='POST'>
+	<form th:object="${newPlayer}" th:action="@{/addPlayer}" method='post'>
 	
 	 Jersey Number: <input name="jerseynum" size="2"> <br/>
-	 First Name: <input name="firstname" size="30"> <br />
-	 Last Name: <input name="lastname" size="30"> <br />
-	 Age: <input name="age" size="2"><br />
-	 Position: <input name="playerpos" size="2"><br />
-	 Height: <input name="height" size="5"><br />
-	 Weight: <input name="weight" size="3"><br />
+		First Name: <input name="firstname" size="30"> <br />
+	 	Last Name: 	<input name="lastname" size="30"> <br />
+	 		Age:    <input name="age" size="2"><br />
+		  Position:<input name="playerpos" size="2"><br />
+	 		Height:<input name="height" size="5"><br />
+	 		Weight:<input name="weight" size="3"><br />
 
-        
-        
-        
+			<input type="hidden" th:value="*{playerid}" th:attr="name='playerid'">
+
  <input name="submit" type="submit" value="submit"/>
          
 </form>

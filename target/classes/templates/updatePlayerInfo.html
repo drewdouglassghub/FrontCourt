@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Edit Player Info</title>
+</head>
+<body>
+<div class="container">
+<form action="#" th:action="@{/updatePlayerInfo/{id}(id=${player.getPlayerid()})}" th:object="${player}" method="post">   
+    
+   	<input type="hidden" th:value="*{playerid}" th:attr="name='playerid'">
+    
+	<label for="jerseynum">Jersey Number:</label>
+	<input type="number" th:field="*{jerseynum}" id="jerseynum">
+	<span th:if="${#fields.hasErrors('jerseynum')}" th:errors="*{jerseynum}"></span><br/>
+	
+	<label for="firstname">First Name:</label>
+	<input type="text" th:field="*{firstname}" id="firstName">
+	<span th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></span><br/>
+	
+		<label for="lastname">Last Name:</label>
+	<input type="text" th:field="*{lastname}" id="lastname">
+	<span th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></span><br/>
+
+	<label for="age">Age:</label>
+	<input type="number" th:field="*{age}" id="age">
+	<span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span><br/>
+	
+	<label for="playerpos">Player Position:</label>
+	<input type="text" th:field="*{playerpos}" id="playerpos">
+	<span th:if="${#fields.hasErrors('playerpos')}" th:errors="*{playerpos}"></span><br/>
+	
+	<label for="height">height in inches:</label>
+	<input type="number" th:field="*{height}" id="height">
+	<span th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></span><br/>
+	
+	<label for="weight">Weight:</label>
+	<input type="number" th:field="*{weight}" id="weight">
+	<span th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></span><br/>
+	
+    <input type="submit" value="Update Stats">   
+    
+	</form>
+	<br/>
+	<a href="/viewAllPlayers">Team Home</a> <br />
+</div>
+
+</body>
+</html>
