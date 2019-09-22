@@ -19,16 +19,22 @@ import net.drewdouglass.Dao.PlayerRepository;
 import net.drewdouglass.Dao.TeamRepository;
 
 import net.drewdouglass.Entity.Player;
+import net.drewdouglass.Entity.Coach;
 import net.drewdouglass.Entity.OffensiveStats;
 
 @Controller
 @RequestMapping
-@SessionAttributes({ "player" })
+@SessionAttributes({"coach", "player" })
 public class PlayerController {
 
 	@ModelAttribute("player")
 	public Player setUpPlayerForm() {
 		return new Player();
+	}
+	
+	@ModelAttribute("coach")
+		public Coach setUpCoachForm() {
+		return new Coach();
 	}
 	
 	@Autowired
