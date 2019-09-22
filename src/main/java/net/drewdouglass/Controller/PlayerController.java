@@ -66,23 +66,23 @@ public class PlayerController {
 		
 	@GetMapping("/addPlayer")
 	public String addNewPlayer(Model model) {
-		Player p = new Player();
-		model.addAttribute("player", p);
+		Player player = new Player();
+		model.addAttribute("player", player);
 		return "/addPlayer";
 	}
 
-	@PostMapping("/addPlayer/{id}")				//place has generated id by post -- get it and use it to display player
-	public String addNewPlayer(@ModelAttribute Player p, Model model) {
-		System.out.println("saving new player");
-		System.out.println(p.toString());
-
+	@PostMapping("/addPlayer")				//place has generated id by post -- get it and use it to display player
+	public String addNewPlayer(@ModelAttribute Player player, Model model) {
+		System.out.println("setting up new player");
 		OffensiveStats o = new OffensiveStats();
-		o.setPlayer(p);
-		p.setOffensiveStats(o);
-		playerRepo.save(p);
+		o.setPlayer(player);
+		player.setOffensiveStats(o);
+		System.out.println(player.toString());
+		
+		playerRepo.save(player);
 
 		model.addAttribute("player", playerRepo.findAll());
-		return "/viewPlayer";
+		return "/viewAllPlayers";
 	}
 
 	@GetMapping("/editPlayerInfo/{id}")
