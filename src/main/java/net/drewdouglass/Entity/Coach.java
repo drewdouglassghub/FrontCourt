@@ -1,17 +1,34 @@
 package net.drewdouglass.Entity;
 
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
+
+
+@Entity
+@Table(name="coach")
+@DynamicUpdate
 public class Coach {
 
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long coachid;
-	@Column(name = "COACHID")
+	@Column(name = "COACHFIRSTNAME")
 	private String coachfirstname;
 	@Column(name = "COACHLASTNAME")
 	private String coachlastname;
@@ -26,8 +43,13 @@ public class Coach {
 	@Column(name = "AUTHORIZATION")
 	private String authorization;
 	
-	//@OneToMany()
-	
+	@Column(name="coachid",nullable = true)
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<Team> teams;
+	/*@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "coachid", nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private Team team;*/
 	
 	public Coach() {
 	

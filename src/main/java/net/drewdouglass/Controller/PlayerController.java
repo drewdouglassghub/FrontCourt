@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import net.drewdouglass.Dao.CoachRepository;
 import net.drewdouglass.Dao.OffenseRepo;
 import net.drewdouglass.Dao.PlayerRepository;
 import net.drewdouglass.Dao.TeamRepository;
-import net.drewdouglass.Dao.UserRepository;
+
 import net.drewdouglass.Entity.Player;
 import net.drewdouglass.Entity.OffensiveStats;
 
@@ -34,13 +35,13 @@ public class PlayerController {
 	TeamRepository teamRepo;
 
 	@Autowired
-	UserRepository userRepo;
+	CoachRepository coachRepo;
 	
 	@Autowired
 	PlayerRepository playerRepo;
 
 	@Autowired
-	OffenseRepo oRepo;
+	OffenseRepo offenseRepo;
 
 	@GetMapping("/viewAllPlayers")
 	public String viewAllPlayers(Model model) {
@@ -115,7 +116,7 @@ public class PlayerController {
 	public String showOffensiveStatsByPlayer(@PathVariable("id") long id, Model model) {
 
 		Player player = playerRepo.findByPlayerid(id);
-		OffensiveStats stats = oRepo.findById(id);
+		OffensiveStats stats = offenseRepo.findById(id);
 
 		System.out.println(player.toString());
 		System.out.println(stats.toString());
@@ -131,7 +132,7 @@ public class PlayerController {
 	@GetMapping("/editOffensiveStats/{id}")
 	public String showOffenseUpdateForm(@PathVariable("id") long id, Model model) {
 
-		OffensiveStats stats = oRepo.findById(id);
+		OffensiveStats stats = offenseRepo.findById(id);
 
 		model.addAttribute(stats);
 
@@ -145,7 +146,7 @@ public class PlayerController {
 
 		OffensiveStats stats = offensiveStats;
 		System.out.println(stats.toString());
-		oRepo.save(stats);
+		offenseRepo.save(stats);
 
 		double fgpct = findFgPct(stats.getFieldgoalsmade(), stats.getFieldgoalstaken());
 		double ftpct = findFtPct(stats.getFreethrowsmade(), stats.getFreethrowstaken());

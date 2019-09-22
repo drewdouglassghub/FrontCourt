@@ -1,16 +1,23 @@
 package net.drewdouglass.Entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-@Table(name="teams")
+@Table(name="team")
 @DynamicUpdate
 public class Team {
 
@@ -19,8 +26,6 @@ public class Team {
 	private long teamid;
 	@Column(name = "TEAMNAME")
 	private String teamname;
-	@Column(name = "COACH")
-	private String coach;
 	@Column(name = "TEAMCAPTAIN")
 	private String teamcaptain;
 	@Column(name = "WINS")
@@ -30,11 +35,14 @@ public class Team {
 	@Column(name = "TIES")
 	private int ties;
 	
+	@ManyToOne(cascade=CascadeType.ALL)
+	private Coach coach;
+	
 	public Team() {
 		
 	}
 
-	public Team(long teamid, String teamname, String coach, String teamcaptain, int wins, int losses, int ties) {
+	public Team(long teamid, String teamname, Coach coach, String teamcaptain, int wins, int losses, int ties) {
 		super();
 		this.teamid = teamid;
 		this.teamname = teamname;
@@ -61,11 +69,11 @@ public class Team {
 		this.teamname = teamname;
 	}
 
-	public String getCoach() {
+	public Coach getCoach() {
 		return coach;
 	}
 
-	public void setCoach(String coach) {
+	public void setCoach(Coach coach) {
 		this.coach = coach;
 	}
 
