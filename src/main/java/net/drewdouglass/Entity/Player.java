@@ -7,6 +7,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -37,6 +39,10 @@ public class Player {
 	@Column(name="WEIGHT")
 	private String weight;
 	
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "teamid")
+	private Team team;
 	
 	@OneToOne(fetch=FetchType.LAZY,
 			cascade=CascadeType.ALL,

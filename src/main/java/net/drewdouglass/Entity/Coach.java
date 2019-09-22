@@ -15,14 +15,11 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
 
-
-
 @Entity
-@Table(name="coach")
+@Table(name = "coach")
 @DynamicUpdate
 public class Coach {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long coachid;
@@ -40,22 +37,18 @@ public class Coach {
 	private String coachpassword;
 	@Column(name = "AUTHORIZATION")
 	private String authorization;
-	
-	@Column(name="coachid",nullable = true)
-	@OneToMany(cascade=CascadeType.ALL)
+
+	@Column(name = "coachid", nullable = true)
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Team> teams;
-	/*@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "coachid", nullable = false)
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	private Team team;*/
-	
+
 	public Coach() {
-	
+
 	}
-	
+
 	public Coach(long coachid, String coachfirstname, String coachlastname, String coachemail, String coachphone,
 			String coachusername, String coachpassword, String authorization) {
-	
+
 		this.coachid = coachid;
 		this.coachfirstname = coachfirstname;
 		this.coachlastname = coachlastname;
@@ -129,8 +122,12 @@ public class Coach {
 	public void setAuthorization(String authorization) {
 		this.authorization = authorization;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "Coach [coachid=" + coachid + ", coachfirstname=" + coachfirstname + ", coachlastname=" + coachlastname
+				+ ", coachemail=" + coachemail + ", coachphone=" + coachphone + ", coachusername=" + coachusername
+				+ ", coachpassword=" + coachpassword + ", authorization=" + authorization + ", teams=" + teams + "]";
+	}
 
 }

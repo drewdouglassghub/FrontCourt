@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Coach Portal</title>
+</head>
+<body>
+<header>Coaching Portal</header>
+
+<div class="container">
+	<h2>Welcome Coach <span th:text="${coach.getCoachlastname()}"> </span>! What would you like to do?</h2>
+	<!-- Not sure if all of these will be links or form buttons so I went with links for simplicity 
+
+
+	<a th:href="@{/viewTeams/{id}(id=${coach.getCoachid())}">View Teams</a><br>-->
+	<a th:href="@{/updateCoach/{id}(id=${coach.getCoachid()})}">Update Profile</a><br>
+	<a href="/logout">Logout</a>
+</div>
+</body>
+</html>

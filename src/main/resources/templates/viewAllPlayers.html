@@ -26,7 +26,7 @@
 
 					</tr>
 				</thead>
-				<tr th:each="currentPlayer : ${player}">
+				<tr th:each="currentPlayer : ${players}">
 					<td th:text="${currentPlayer.getPlayerid()}" />
 					<td th:text="${currentPlayer.getJerseynum()}" />
 					<td th:text="${currentPlayer.getFirstname()}" />
@@ -42,11 +42,11 @@
 					<td><a
 						th:href="@{/editPlayerInfo/{playerid}(playerid=${currentPlayer.getPlayerid()})}">Edit</a></td>
 					<td><a
-						th:href="@{/deletePlayer/{playerid}(playerid=${currentPlayer.getPlayerid()})}">Delete</a></td>
+						th:href="@{deletePlayer/{playerid}(playerid=${currentPlayer.getPlayerid()})}">Delete</a></td>
 					<!-- <td th:text="${currentPlayer.playerpic}"/> -->
 
 				</tr>
-				<br />
+				
 			</table>
 		</form>
 		<a href="../addPlayer">Add Player</a>

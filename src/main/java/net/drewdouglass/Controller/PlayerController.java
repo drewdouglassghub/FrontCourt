@@ -19,12 +19,13 @@ import net.drewdouglass.Dao.PlayerRepository;
 import net.drewdouglass.Dao.TeamRepository;
 
 import net.drewdouglass.Entity.Player;
+import net.drewdouglass.Entity.Team;
 import net.drewdouglass.Entity.Coach;
 import net.drewdouglass.Entity.OffensiveStats;
 
 @Controller
 @RequestMapping
-@SessionAttributes({"coach", "player" })
+@SessionAttributes({"coach", "player", "team" })
 public class PlayerController {
 
 	@ModelAttribute("player")
@@ -35,6 +36,11 @@ public class PlayerController {
 	@ModelAttribute("coach")
 		public Coach setUpCoachForm() {
 		return new Coach();
+	}
+	
+	@ModelAttribute("team")
+		public Team setUpTeamForm() {
+		return new Team();
 	}
 	
 	@Autowired
@@ -48,10 +54,46 @@ public class PlayerController {
 
 	@Autowired
 	OffenseRepo offenseRepo;
+	
+	/* ********************************Coach Controller************************** */
+	
+	@GetMapping("/addCoach")
+	public String createCoach(Model model) {
+		Coach coach = new Coach();
+		model.addAttribute("coach", coach);
+		return "/addCoach";
+	}
+	
+	@PostMapping("/addCoach")
+	public String createCoach(Coach coach, Model model) {
+		coachRepo.save(coach);
+		model.addAttribute("coach", coach);
+		return "/coachProfile";
+	}
+	
+	
+	
+/* *****************************Team Controller ********************************** */
 
+	@GetMapping("/createTeam")
+	public String createTeam(Model model) {
+		Team t = new Team();
+		model.addAttribute("team", t);
+		return "/createTeam";
+	}
+	
+	
+	
+	
+	
+	
+	
+/* ***********************************Player Controller *************************** */
 	@GetMapping("/viewAllPlayers")
-	public String viewAllPlayers(Model model) {
-		model.addAttribute("player", playerRepo.findAll());
+	public String viewAllPlayers(Coach coach, Player player, Model model) {
+		model.addAttribute("coach", coach);
+		model.addAttribute("players", playerRepo.findAll());
+		
 		return "viewAllPlayers";
 	}
 

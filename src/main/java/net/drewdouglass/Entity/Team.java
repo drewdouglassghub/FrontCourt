@@ -1,12 +1,17 @@
 package net.drewdouglass.Entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -34,6 +39,10 @@ public class Team {
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Coach coach;
 	
+	@OneToMany(cascade=CascadeType.ALL,
+				fetch=FetchType.LAZY,
+				mappedBy="playerid")	
+	private Set<Player> players = new HashSet<>();
 	
 	
 	public Team() {
@@ -82,6 +91,14 @@ public class Team {
 	public void setTeamcaptain(String teamcaptain) {
 		this.teamcaptain = teamcaptain;
 	}
+	
+	public Set<Player> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(Set<Player> players) {
+		this.players = players;
+	}
 
 	public int getWins() {
 		return wins;
@@ -109,9 +126,11 @@ public class Team {
 
 	@Override
 	public String toString() {
-		return "Team [teamid=" + teamid + ", teamname=" + teamname + ", coach=" + coach + ", teamcaptain=" + teamcaptain
-				+ ", wins=" + wins + ", losses=" + losses + ", ties=" + ties + "]";
+		return "Team [teamid=" + teamid + ", teamname=" + teamname + ", teamcaptain=" + teamcaptain + ", wins=" + wins
+				+ ", losses=" + losses + ", ties=" + ties + ", coach=" + coach + ", players=" + players + "]";
 	}
+
+	
 	
 	
 	
